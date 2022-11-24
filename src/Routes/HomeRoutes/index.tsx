@@ -14,7 +14,7 @@ const HomeStack = createNativeStackNavigator<HomeStackRoutes>();
 
 export const HomeRoutes = () => {
   return (
-    <HomeStack.Navigator screenOptions={{headerShown: true}}>
+    <HomeStack.Navigator screenOptions={{headerTitle: 'Tópicos Relevantes'}}>
       <HomeStack.Screen name="HomePage" component={HomePage} />
       <HomeStack.Screen name="PostPage" component={PostPage} options={{
         headerBackVisible: true,

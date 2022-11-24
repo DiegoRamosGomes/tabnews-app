@@ -24,10 +24,10 @@ export const PostComments = ({ post }: PostCommentsProps) => {
     <View style={styles.container}>
       {comments.map((item) => {
         return (
-          <View>
+          <View key={item.id} style={styles.bodyContainer}>
             <Text style={styles.owner}>{item.owner_username}</Text>
             <View style={styles.body}>
-              <Markdown key={item.id}>{item.body}</Markdown>
+              <Markdown>{item.body}</Markdown>
             </View>
           </View>
         )

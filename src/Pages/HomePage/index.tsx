@@ -1,6 +1,6 @@
 import { useContents } from "../../Hooks/useContents";
-import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, View } from "react-native";
+import { useCallback, useEffect, useState } from "react";
+import { ActivityIndicator, FlatList, RefreshControl, View } from "react-native";
 import { HomeListItem } from "../../Components/HomeListItem";
 
 
@@ -9,6 +9,7 @@ export const HomePage = () => {
 
   const [contents, setContents] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
 
   const perPage = 10
 
@@ -24,10 +25,24 @@ export const HomePage = () => {
     setIsLoading(false)
   }
 
+  const onRefresh = useCallback( () => {
+    setRefreshing(true)
+    setContents([])
+    loadPosts().then(() => {
+      setRefreshing(false)
+    })
+  }, []);
+
   return (
     <View style={{ marginVertical: 8 }}>
-      {isLoading ? <ActivityIndicator size={'large'}/> : null}
+
       <FlatList
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
         contentContainerStyle={{
           marginHorizontal: 16
         }}
@@ -37,6 +52,13 @@ export const HomePage = () => {
         ItemSeparatorComponent={() => <View style={{ height: 16 }}/>}
         onEndReached={loadPosts}
         onEndReachedThreshold={0.2}
+        ListFooterComponent={() => {
+          return (
+            <>
+              {isLoading && !refreshing ? <ActivityIndicator size={'large'}/> : null}
+            </>
+          )
+        }}
       />
     </View>
   )
