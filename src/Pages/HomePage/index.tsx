@@ -1,6 +1,6 @@
 import { useContents } from "../../Hooks/useContents";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, View } from "react-native";
 import { HomeListItem } from "../../Components/HomeListItem";
 
 

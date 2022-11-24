@@ -5,7 +5,6 @@ import { styles } from "./styles";
 import { useContents } from "../../Hooks/useContents";
 import { useEffect, useState } from "react";
 import Markdown from "react-native-markdown-display";
-import { FloatingButton } from "../../Components/FloatingButton";
 import { PostComments } from "../../Components/PostComments";
 
 type ScreenProps = NativeStackScreenProps<HomeStackRoutes, 'PostPage'>;
@@ -25,10 +24,6 @@ export const PostPage = ({ route }: ScreenProps) => {
       }
     })()
   })
-
-  const handleOpenComments = () => {
-
-  }
 
   return (
     <>
