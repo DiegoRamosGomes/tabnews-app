@@ -10,7 +10,7 @@ export const useContents = () => {
       page = 1
     }
 
-    const { data } = await api.get(`/contents?per_page=${limit}&page=${page}`)
+    const { data } = await api.get(`/contents?per_page=${limit}&page=${page}&strategy=relevant`)
 
     return data
   }
