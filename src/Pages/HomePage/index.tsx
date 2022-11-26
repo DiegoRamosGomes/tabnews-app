@@ -10,7 +10,6 @@ type ScreenOptions = NativeStackNavigationProp<AppRoutesStackParams, 'HomeRoutes
 export const HomePage = ({ route }: ScreenOptions) => {
   const { getLatestContents } = useContents()
 
-  console.log(route.name);
   const strategyToConsult = route.name === 'HomePage' ? 'relevant' : 'new'
 
   const [contents, setContents] = useState([])
