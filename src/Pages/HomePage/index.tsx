@@ -2,10 +2,15 @@ import { useContents } from "../../Hooks/useContents";
 import { useCallback, useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, RefreshControl, View } from "react-native";
 import { HomeListItem } from "../../Components/HomeListItem";
+import { AppRoutesStackParams } from "../../Routes";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
+type ScreenOptions = NativeStackNavigationProp<AppRoutesStackParams, 'HomeRoutes'>
 
-export const HomePage = () => {
+export const HomePage = ({ route }: ScreenOptions) => {
   const { getLatestContents } = useContents()
+
+  const strategyToConsult = route.name === 'HomePage' ? 'relevant' : 'new'
 
   const [contents, setContents] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -20,12 +25,12 @@ export const HomePage = () => {
   const loadPosts = async () => {
     setIsLoading(true)
     const page = contents.length === 0 ? 1 : ((contents.length / perPage) + 1)
-    const data = await getLatestContents(page, perPage)
+    const data = await getLatestContents(page, perPage, strategyToConsult)
     setContents([...contents, ...data])
     setIsLoading(false)
   }
 
-  const onRefresh = useCallback( () => {
+  const onRefresh = useCallback(() => {
     setRefreshing(true)
     setContents([])
     loadPosts().then(() => {
