@@ -1,9 +1,14 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { House } from 'phosphor-react-native';
+import { Clock, House } from 'phosphor-react-native';
 import { HomeRoutes } from './HomeRoutes';
-import { RecentRoutes } from './RecentRoutes';
+import { RecentRoutes } from "./RecentRoutes";
 
-const Tab = createBottomTabNavigator();
+export type AppRoutesStackParams = {
+  HomeRoutes: undefined
+  RecentRoutes: undefined
+}
+
+const Tab = createBottomTabNavigator<AppRoutesStackParams>();
 
 export const Routes = () => {
   return (
@@ -20,7 +25,7 @@ export const Routes = () => {
           name="RecentRoutes"
           component={RecentRoutes}
           options={{
-            tabBarIcon: () => <House />,
+            tabBarIcon: () => <Clock />,
             tabBarLabel: 'Recentes',
           }}
         />

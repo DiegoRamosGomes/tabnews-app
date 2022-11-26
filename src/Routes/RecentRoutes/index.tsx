@@ -1,10 +1,10 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { PostModel } from "../../Models/PostModel";
+import { HomePage } from "../../Pages/HomePage";
 import { PostPage } from "../../Pages/PostPage";
-import { RecentPage } from '../../Pages/RecentPage';
+import { PostModel } from "../../Models/PostModel";
 
 export type RecentStackRoutes = {
-  RecentPage: undefined
+  HomePage: undefined
   PostPage: {
     post: PostModel
   }
@@ -15,7 +15,7 @@ const HomeStack = createNativeStackNavigator<RecentStackRoutes>();
 export const RecentRoutes = () => {
   return (
     <HomeStack.Navigator screenOptions={{headerTitle: 'Tópicos Recentes'}}>
-      <HomeStack.Screen name="RecentPage" component={RecentPage} />
+      <HomeStack.Screen name="RecentPage" component={HomePage} />
       <HomeStack.Screen name="PostPage" component={PostPage} options={{
         headerBackVisible: true,
         headerBackTitle: 'Inicio'
