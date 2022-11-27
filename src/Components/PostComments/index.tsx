@@ -1,9 +1,9 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { useEffect, useState } from "react";
 import { useComments } from "../../Hooks/useComments";
 import { PostModel } from "../../Models/PostModel";
-import Markdown from "react-native-markdown-display";
 import { styles } from "./styles";
+import { PostCommentItem } from "../PostCommentItem";
 
 interface PostCommentsProps {
   post: PostModel
@@ -22,16 +22,7 @@ export const PostComments = ({ post }: PostCommentsProps) => {
 
   return (
     <View style={styles.container}>
-      {comments.map((item) => {
-        return (
-          <View key={item.id} style={styles.bodyContainer}>
-            <Text style={styles.owner}>{item.owner_username}</Text>
-            <View style={styles.body}>
-              <Markdown>{item.body}</Markdown>
-            </View>
-          </View>
-        )
-      })}
+      {comments.map((item) => <PostCommentItem comment={item}/>)}
     </View>
   )
 }
