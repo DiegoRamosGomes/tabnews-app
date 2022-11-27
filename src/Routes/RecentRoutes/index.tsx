@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HomePage } from "../../Pages/HomePage";
 import { PostPage } from "../../Pages/PostPage";
 import { PostModel } from "../../Models/PostModel";
+import { CommentPage } from "../../Pages/CommentPage";
 
 export type RecentStackRoutes = {
   HomePage: undefined
@@ -20,6 +21,7 @@ export const RecentRoutes = () => {
         headerBackVisible: true,
         headerBackTitle: 'Inicio'
       }}/>
+      <HomeStack.Screen name="CommentPage" component={CommentPage}/>
     </HomeStack.Navigator>
   )
 }
