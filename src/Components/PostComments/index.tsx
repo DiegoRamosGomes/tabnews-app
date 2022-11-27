@@ -22,7 +22,7 @@ export const PostComments = ({ post }: PostCommentsProps) => {
 
   return (
     <View style={styles.container}>
-      {comments.map((item) => <PostCommentItem comment={item}/>)}
+      {comments.map((item) => <PostCommentItem key={item.id} comment={item}/>)}
     </View>
   )
 }
