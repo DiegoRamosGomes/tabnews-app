@@ -1,4 +1,5 @@
 export type PostModel = {
+  id: string
   title: string
   tabcoins: number
   children_deep_count: number

@@ -18,4 +18,14 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  floatIcon: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    zIndex: 1,
+    padding: 16,
+    borderRadius: 50,
+    backgroundColor: '#c4c4c4',
+    margin: 16
+  }
 })
