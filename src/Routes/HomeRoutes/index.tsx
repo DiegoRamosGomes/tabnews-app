@@ -2,11 +2,16 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HomePage } from "../../Pages/HomePage";
 import { PostPage } from "../../Pages/PostPage";
 import { PostModel } from "../../Models/PostModel";
+import { PostCommentItemModel } from "../../Models/PostCommentItemModel";
+import { CommentPage } from "../../Pages/CommentPage";
 
 export type HomeStackRoutes = {
   HomePage: undefined
   PostPage: {
     post: PostModel
+  }
+  CommentPage: {
+    comment: PostCommentItemModel
   }
 }
 
@@ -20,6 +25,7 @@ export const HomeRoutes = () => {
         headerBackVisible: true,
         headerBackTitle: 'Inicio'
       }}/>
+      <HomeStack.Screen name="CommentPage" component={CommentPage} />
     </HomeStack.Navigator>
   )
 }
