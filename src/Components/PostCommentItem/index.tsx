@@ -21,7 +21,7 @@ export const PostCommentItem = ({ comment, canNavigate }: PostCommentItemProps) 
   }
 
   const handleOpenComment = () => {
-    if (comment.children.length > 0) {
+    if (comment.children.length > 0 && canNavigate) {
       navigation.push('CommentPage', { comment })
     }
   }

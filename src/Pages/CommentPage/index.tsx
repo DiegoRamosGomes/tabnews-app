@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { PostCommentItemModel } from "../../Models/PostCommentItemModel";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { HomeStackRoutes } from "../../Routes/HomeRoutes";
@@ -12,15 +12,16 @@ export const CommentPage = ({ route }: ScreenProps) => {
   const comment: PostCommentItemModel = route.params.comment
 
   return (
-    <View style={styles.container}>
-      <Text>Em resposta á: {comment.owner_username}</Text>
+    <ScrollView style={styles.container}>
+      <Text style={styles.replyTo}>Em resposta á: {comment.owner_username}</Text>
       <PostCommentItem comment={comment} canNavigate={false}/>
 
+      <Text style={styles.repliesText}>Respostas</Text>
       <View>
         {comment.children.map(item => {
-          return <PostCommentItem comment={item}/>
+          return <PostCommentItem key={item.id} comment={item}/>
         })}
       </View>
-    </View>
+    </ScrollView>
   )
 }
