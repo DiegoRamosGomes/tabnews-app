@@ -6,6 +6,7 @@ import { FavoriteRoutes } from "./FavoriteRoutes";
 import { AuthRoutes } from "./AuthRoutes";
 import { useContext } from "react";
 import AuthContext from "../Contexts/AuthContext";
+import { AccountRoutes } from "./AuccountRoutes";
 
 export type AppRoutesStackParams = {
   HomeRoutes: undefined
@@ -18,7 +19,7 @@ const Tab = createBottomTabNavigator<AppRoutesStackParams>();
 export const Routes = () => {
 
   const { isLogged, user } = useContext(AuthContext)
-  console.log(user);
+
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
@@ -47,7 +48,7 @@ export const Routes = () => {
       />
       <Tab.Screen
         name='AuthRoutes'
-        component={AuthRoutes}
+        component={isLogged ? AccountRoutes : AuthRoutes}
         options={{
           tabBarIcon: () => <User weight={isLogged ? 'fill' : 'regular'}/>,
           tabBarLabel: isLogged ? user.username : 'Login'

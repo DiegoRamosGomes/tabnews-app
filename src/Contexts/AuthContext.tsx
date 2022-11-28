@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { UserModel } from "../Models/UserModel";
 import api from "../Services/api";
+import { useAuth } from "../Hooks/useAuth";
 
 interface AuthContextProps {
   user: UserModel
@@ -11,12 +12,16 @@ interface AuthContextProps {
   signOut(): void
 
   signUp(): void
+
+  logInUser(user: UserModel): void
 }
 
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps)
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState<UserModel>()
+  const { saveToken, deleteToken, saveUser, deleteUser } = useAuth()
+
+  const [user, setUser] = useState<UserModel | null>(null)
 
   const signIn = async (email: string, password: string) => {
     try {
@@ -28,6 +33,8 @@ export const AuthProvider = ({ children }) => {
 
       const userData = await api.get(`/user`)
 
+      await saveToken(res.data.token)
+      await saveUser(userData.data)
       setUser(userData.data)
       return true
     } catch (e) {
@@ -35,12 +42,19 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  const signOut = () => {
-
+  const signOut = async () => {
+    await api.delete('/sessions')
+    await deleteToken()
+    await deleteUser()
+    setUser(null)
   }
 
   const signUp = () => {
 
+  }
+
+  const logInUser = (user: UserModel) => {
+    setUser(user)
   }
 
   return (
@@ -50,6 +64,7 @@ export const AuthProvider = ({ children }) => {
       signIn,
       signOut,
       signUp,
+      logInUser,
     }}>
       {children}
     </AuthContext.Provider>

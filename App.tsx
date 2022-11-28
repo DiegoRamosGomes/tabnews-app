@@ -1,9 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
-import { NavigationContainer } from '@react-navigation/native';
-import { Routes } from "./src/Routes";
 import { LogBox } from "react-native";
-import { FavoriteProvider } from "./src/Contexts/FavoriteContext";
 import { AuthProvider } from "./src/Contexts/AuthContext";
+import { SplashScreenPage } from "./src/Pages/SplashScreenPage";
 
 export default function App() {
   LogBox.ignoreLogs([
@@ -12,14 +9,9 @@ export default function App() {
   ])
 
   return (
-    <NavigationContainer>
-      <AuthProvider>
-        <FavoriteProvider>
-          <Routes/>
-        </FavoriteProvider>
-      </AuthProvider>
-      <StatusBar style="auto"/>
-    </NavigationContainer>
+    <AuthProvider>
+      <SplashScreenPage />
+    </AuthProvider>
   );
 }
 
