@@ -3,6 +3,9 @@ import { PostPage } from "../../Pages/PostPage";
 import { PostModel } from "../../Models/PostModel";
 import { CommentPage } from "../../Pages/CommentPage";
 import { FavoritePage } from "../../Pages/FavoritePage";
+import { CoinsInfo } from "../../Components/CoinsInfo";
+import { useContext } from "react";
+import AuthContext from "../../Contexts/AuthContext";
 
 export type FavoriteStackRoutes = {
   FavoritePage: undefined
@@ -17,9 +20,14 @@ export type FavoriteStackRoutes = {
 const FavoriteStack = createNativeStackNavigator<FavoriteStackRoutes>();
 
 export const FavoriteRoutes = () => {
+  const { isLogged } = useContext(AuthContext)
+
   return (
-    <FavoriteStack.Navigator screenOptions={{headerTitle: 'Tópicos Favoritos'}}>
-      <FavoriteStack.Screen name="FavoritePage" component={FavoritePage} />
+    <FavoriteStack.Navigator screenOptions={{
+      headerTitle: 'Tópicos Favoritos',
+      headerRight: () => isLogged ? <CoinsInfo/> : null
+    }}>
+      <FavoriteStack.Screen name="FavoritePage" component={FavoritePage}/>
       <FavoriteStack.Screen name="PostPage" component={PostPage} options={{
         headerBackVisible: true,
         headerBackTitle: 'Inicio'

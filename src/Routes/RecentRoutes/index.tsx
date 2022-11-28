@@ -3,6 +3,9 @@ import { HomePage } from "../../Pages/HomePage";
 import { PostPage } from "../../Pages/PostPage";
 import { PostModel } from "../../Models/PostModel";
 import { CommentPage } from "../../Pages/CommentPage";
+import { CoinsInfo } from "../../Components/CoinsInfo";
+import { useContext } from "react";
+import AuthContext from "../../Contexts/AuthContext";
 
 export type RecentStackRoutes = {
   HomePage: undefined
@@ -14,8 +17,13 @@ export type RecentStackRoutes = {
 const HomeStack = createNativeStackNavigator<RecentStackRoutes>();
 
 export const RecentRoutes = () => {
+  const { isLogged } = useContext(AuthContext)
+
   return (
-    <HomeStack.Navigator screenOptions={{headerTitle: 'Tópicos Recentes'}}>
+    <HomeStack.Navigator screenOptions={{
+      headerTitle: 'Tópicos Recentes',
+      headerRight: () => isLogged ? <CoinsInfo/> : null
+    }}>
       <HomeStack.Screen name="RecentPage" component={HomePage} />
       <HomeStack.Screen name="PostPage" component={PostPage} options={{
         headerBackVisible: true,
