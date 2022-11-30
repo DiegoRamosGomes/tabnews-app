@@ -8,17 +8,16 @@ import { useContext, useEffect } from "react";
 
 export const SplashScreenPage = () => {
 
-  const { getToken, getUser } = useAuth()
+  const { getToken } = useAuth()
   const { logInUser, isLogged } = useContext(AuthContext)
 
   useEffect(() => {
     (async () => {
       if (!isLogged) {
         const token = await getToken()
-        const user = await getUser()
 
-        if (token && user) {
-          await logInUser(user)
+        if (token) {
+          await logInUser()
         }
       }
     })()

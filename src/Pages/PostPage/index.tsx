@@ -42,17 +42,7 @@ export const PostPage = ({ route }: ScreenProps) => {
         <View style={{
           borderBottomWidth: 2
         }}>
-          <Markdown style={{
-            link: {
-              lineHeight: 22
-            },
-            heading3: {
-              marginVertical: 8
-            },
-            hr: {
-              marginVertical: 8
-            }
-          }}>{postContent?.body ?? ''}</Markdown>
+          <Markdown>{postContent?.body ?? ''}</Markdown>
         </View>
         <PostComments post={post}/>
       </ScrollView>

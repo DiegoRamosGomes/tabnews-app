@@ -8,15 +8,17 @@ export const CoinsInfo = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.coinItemContainer}>
-        <View style={[styles.coinBox, styles.tabCoin]}/>
-        <Text style={styles.coinText}>{user?.tabcash} </Text>
-      </View>
 
       <View style={styles.coinItemContainer}>
         <View style={[styles.coinBox, styles.tabCash]}/>
         <Text style={styles.coinText}>{user?.tabcoins}</Text>
       </View>
+
+      <View style={styles.coinItemContainer}>
+        <View style={[styles.coinBox, styles.tabCoin]}/>
+        <Text style={styles.coinText}>{user?.tabcash} </Text>
+      </View>
+
     </View>
   )
 }

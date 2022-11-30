@@ -13,7 +13,7 @@ interface AuthContextProps {
 
   signUp(): void
 
-  logInUser(user: UserModel): void
+  logInUser(): void
 }
 
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps)
@@ -53,8 +53,9 @@ export const AuthProvider = ({ children }) => {
 
   }
 
-  const logInUser = (user: UserModel) => {
-    setUser(user)
+  const logInUser = async () => {
+    const userData = await api.get(`/user`)
+    setUser(userData.data)
   }
 
   return (
