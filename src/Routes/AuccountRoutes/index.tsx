@@ -3,21 +3,27 @@ import { AccountPage } from "../../Pages/AccountPage";
 import { useContext } from "react";
 import AuthContext from "../../Contexts/AuthContext";
 import { CoinsInfo } from "../../Components/CoinsInfo";
+import { ProfilePage } from "../../Pages/ProfilePage";
 
 export type AccountStackRoutes = {
   AccountPage: undefined
+  ProfilePage: {
+    username?: string
+  }
 }
 
 const AccountStack = createNativeStackNavigator<AccountStackRoutes>()
 
 export const AccountRoutes = () => {
-  const { isLogged } = useContext(AuthContext)
+  const { isLogged, user } = useContext(AuthContext)
+
   return (
     <AccountStack.Navigator screenOptions={{
       headerTitle: 'Conta',
       headerRight: () => isLogged ? <CoinsInfo/> : null
     }}>
       <AccountStack.Screen name='AccountPage' component={AccountPage}/>
+      <AccountStack.Screen name='ProfilePage' component={ProfilePage}/>
     </AccountStack.Navigator>
   )
 }

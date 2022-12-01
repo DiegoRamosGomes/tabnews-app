@@ -5,4 +5,6 @@ export type PostModel = {
   children_deep_count: number
   owner_username: string
   slug?: string
+  parent_id?: string
+  body?: string
 }

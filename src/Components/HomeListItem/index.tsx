@@ -19,10 +19,14 @@ export const HomeListItem = ({ post }: HomeListItemProps) => {
     navigation.push('PostPage', { post })
   }
 
+  const handleOpenProfile = () => {
+    navigation.navigate('ProfilePage', { username: post.owner_username })
+  }
+
   return (
     <TouchableOpacity onPress={handleOpenPost}>
       <View style={styles.container}>
-        <Text>{post.title}</Text>
+        <Text>{post.parent_id ? post.body : post.title}</Text>
         <View style={styles.postInfoContainer}>
           <Text style={styles.postInfo}>
             <Text>{post.tabcoins}</Text>
@@ -32,7 +36,9 @@ export const HomeListItem = ({ post }: HomeListItemProps) => {
             <Text>{post.children_deep_count}</Text>
             <Text> Comentarios</Text>
           </Text>
-          <Text style={styles.postInfo}>{post.owner_username}</Text>
+          <TouchableOpacity onPress={handleOpenProfile}>
+            <Text style={styles.postInfo}>{post.owner_username}</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableOpacity>
