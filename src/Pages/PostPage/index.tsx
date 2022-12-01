@@ -1,4 +1,4 @@
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { HomeStackRoutes } from "../../Routes/HomeRoutes";
 import { styles } from "./styles";
@@ -6,16 +6,19 @@ import { useContents } from "../../Hooks/useContents";
 import { useContext, useEffect, useState } from "react";
 import Markdown from "react-native-markdown-display";
 import { PostComments } from "../../Components/PostComments";
-import { Heart } from "phosphor-react-native";
+import { DotsThreeVertical, Heart, ThumbsDown, ThumbsUp } from "phosphor-react-native";
 import FavoriteContext from "../../Contexts/FavoriteContext";
+import { FloatingAction } from "react-native-floating-action";
+import AuthContext from "../../Contexts/AuthContext";
 
 type ScreenProps = NativeStackScreenProps<HomeStackRoutes, 'PostPage'>;
 
 export const PostPage = ({ route }: ScreenProps) => {
   const post = route.params.post
 
-  const { getContent } = useContents()
+  const { getContent, giveVote } = useContents()
   const { isFavorite, toggleFavorite } = useContext(FavoriteContext)
+  const { logInUser } = useContext(AuthContext)
 
   const [postContent, setPostContent] = useState()
 
@@ -26,17 +29,59 @@ export const PostPage = ({ route }: ScreenProps) => {
         setPostContent(data)
       }
     })()
-  })
+  }, [])
 
-  const handleToggleFavorite = () => {
-    toggleFavorite(post)
+  const handleClickFloatItem = (name: string) => {
+    switch (name) {
+      case 'is_favorite':
+        toggleFavorite(post)
+        break
+      case 'tabcoin_up':
+        giveVote(post.owner_username, post.slug, 'credit')
+          .then(() => {
+            logInUser()
+          })
+        break
+      case 'tabcoin_down':
+        giveVote(post.owner_username, post.slug, 'debit')
+          .then(() => {
+            logInUser()
+          })
+        break
+    }
   }
 
   return (
     <>
-      <TouchableOpacity style={styles.floatIcon} onPress={handleToggleFavorite}>
-        <Heart weight={isFavorite(post) ? 'fill' : 'regular'} color={'red'}/>
-      </TouchableOpacity>
+      <View style={{
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        zIndex: 1,
+      }}>
+        <FloatingAction
+          color={'#0969da'}
+          floatingIcon={<DotsThreeVertical size={35} color={'white'} weight={'bold'} />}
+          actions={[
+            {
+              text: "Aprovar",
+              icon: <ThumbsUp color={'#ddf4ff'}/>,
+              name: "tabcoin_up",
+            },
+            {
+              text: isFavorite(post) ? "Desfavoritar" : "Favoritar",
+              icon: <Heart weight={isFavorite(post) ? 'fill' : 'regular'} color={'#ddf4ff'}/>,
+              name: "is_favorite",
+            },
+            {
+              text: "Desaprovar",
+              icon: <ThumbsDown color={'#ddf4ff'}/>,
+              name: "tabcoin_down",
+            },
+          ]}
+          onPressItem={handleClickFloatItem}
+        />
+      </View>
       <ScrollView style={styles.container}>
         <Text style={styles.title}>{post.title}</Text>
         <View style={{

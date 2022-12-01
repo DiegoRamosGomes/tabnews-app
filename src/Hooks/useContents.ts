@@ -25,8 +25,15 @@ export const useContents = () => {
     return data
   }
 
+  const giveVote = async (username: string, postSlug: string, type: string) => {
+    await api.post(`/contents/${username}/${postSlug}/tabcoins`, {
+      transaction_type: type
+    })
+  }
+
   return {
     getLatestContents,
-    getContent
+    getContent,
+    giveVote
   }
 }
