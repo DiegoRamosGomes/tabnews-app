@@ -6,7 +6,7 @@ import { useContents } from "../../Hooks/useContents";
 import { useContext, useEffect, useState } from "react";
 import Markdown from "react-native-markdown-display";
 import { PostComments } from "../../Components/PostComments";
-import { DotsThreeVertical, Heart, ThumbsDown, ThumbsUp } from "phosphor-react-native";
+import { Heart, List, ThumbsDown, ThumbsUp } from "phosphor-react-native";
 import FavoriteContext from "../../Contexts/FavoriteContext";
 import { FloatingAction } from "react-native-floating-action";
 import AuthContext from "../../Contexts/AuthContext";
@@ -61,7 +61,7 @@ export const PostPage = ({ route }: ScreenProps) => {
       }}>
         <FloatingAction
           color={'#0969da'}
-          floatingIcon={<DotsThreeVertical size={35} color={'white'} weight={'bold'} />}
+          floatingIcon={<List color={'white'} weight={'bold'} />}
           actions={[
             {
               text: "Aprovar",
