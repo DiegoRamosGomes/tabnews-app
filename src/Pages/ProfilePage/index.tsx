@@ -71,7 +71,7 @@ export const ProfilePage = ({ route }: NativeStackNavigationProp<AccountStackRou
           paddingHorizontal: 8,
           alignItems: 'center',
           justifyContent: 'center',
-        }} >
+        }}>
           <MagnifyingGlass color={'black'} weight={'bold'} size={18}/>
         </View>
         <TextInput
@@ -98,7 +98,7 @@ export const ProfilePage = ({ route }: NativeStackNavigationProp<AccountStackRou
         }}
         data={searchText != '' ? filteredContents : contents}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <HomeListItem post={item}/>}
+        renderItem={({ item }) => <HomeListItem post={item} withLeftIcon/>}
         ItemSeparatorComponent={() => <View style={{ height: 16 }}/>}
         onEndReached={hasMoreData ? loadContents : null}
         onEndReachedThreshold={0.2}

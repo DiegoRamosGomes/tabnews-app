@@ -7,6 +7,7 @@ import { CommentPage } from "../../Pages/CommentPage";
 import { useContext } from "react";
 import AuthContext from "../../Contexts/AuthContext";
 import { CoinsInfo } from "../../Components/CoinsInfo";
+import { ProfilePage } from "../../Pages/ProfilePage";
 
 export type HomeStackRoutes = {
   HomePage: undefined
@@ -15,6 +16,9 @@ export type HomeStackRoutes = {
   }
   CommentPage: {
     comment: PostCommentItemModel
+  }
+  ProfilePage: {
+    username?: string
   }
 }
 
@@ -34,6 +38,7 @@ export const HomeRoutes = () => {
         headerBackTitle: 'Inicio'
       }}/>
       <HomeStack.Screen name="CommentPage" component={CommentPage}/>
+      <HomeStack.Screen name='ProfilePage' component={ProfilePage}/>
     </HomeStack.Navigator>
   )
 }

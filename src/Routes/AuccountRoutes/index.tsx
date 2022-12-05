@@ -4,6 +4,7 @@ import { useContext } from "react";
 import AuthContext from "../../Contexts/AuthContext";
 import { CoinsInfo } from "../../Components/CoinsInfo";
 import { ProfilePage } from "../../Pages/ProfilePage";
+import { PostPage } from "../../Pages/PostPage";
 
 export type AccountStackRoutes = {
   AccountPage: undefined
@@ -15,7 +16,7 @@ export type AccountStackRoutes = {
 const AccountStack = createNativeStackNavigator<AccountStackRoutes>()
 
 export const AccountRoutes = () => {
-  const { isLogged, user } = useContext(AuthContext)
+  const { isLogged } = useContext(AuthContext)
 
   return (
     <AccountStack.Navigator screenOptions={{
@@ -24,6 +25,10 @@ export const AccountRoutes = () => {
     }}>
       <AccountStack.Screen name='AccountPage' component={AccountPage}/>
       <AccountStack.Screen name='ProfilePage' component={ProfilePage}/>
+      <AccountStack.Screen name="PostPage" component={PostPage} options={{
+        headerBackVisible: true,
+        headerBackTitle: 'Perfil'
+      }}/>
     </AccountStack.Navigator>
   )
 }
