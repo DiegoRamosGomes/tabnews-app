@@ -4,6 +4,8 @@ import { styles } from "./styles";
 import AuthContext from "../../Contexts/AuthContext";
 import { FullscreenLoading } from "../../Components/FullscreenLoading";
 
+const mailFormatValidator = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
 export const LoginPage = () => {
 
   const { signIn } = useContext(AuthContext)
@@ -15,7 +17,7 @@ export const LoginPage = () => {
   const handleSignIn = () => {
     setIsLoading(true)
 
-    if (!(email.length > 0 && email.includes('@'))) {
+    if (!email.match(mailFormatValidator)) {
       alert('preencha todos os campos')
       setIsLoading(false)
       return
