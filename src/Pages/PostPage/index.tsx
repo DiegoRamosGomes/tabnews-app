@@ -6,10 +6,10 @@ import { useContents } from "../../Hooks/useContents";
 import { useContext, useEffect, useState } from "react";
 import Markdown from "react-native-markdown-display";
 import { PostComments } from "../../Components/PostComments";
-import { Heart, List, ThumbsDown, ThumbsUp } from "phosphor-react-native";
+import { Heart, ThumbsDown, ThumbsUp } from "phosphor-react-native";
 import FavoriteContext from "../../Contexts/FavoriteContext";
-import { FloatingAction } from "react-native-floating-action";
 import AuthContext from "../../Contexts/AuthContext";
+import { FloatActionButton } from "../../Components/FloatActionButton";
 
 type ScreenProps = NativeStackScreenProps<HomeStackRoutes, 'PostPage'>;
 
@@ -53,35 +53,26 @@ export const PostPage = ({ route }: ScreenProps) => {
 
   return (
     <>
-      <View style={{
-        position: 'absolute',
-        bottom: 0,
-        right: 0,
-        zIndex: 1,
-      }}>
-        <FloatingAction
-          color={'#0969da'}
-          floatingIcon={<List color={'white'} weight={'bold'} />}
-          actions={[
-            {
-              text: "Aprovar",
-              icon: <ThumbsUp color={'#ddf4ff'}/>,
-              name: "tabcoin_up",
-            },
-            {
-              text: isFavorite(post) ? "Desfavoritar" : "Favoritar",
-              icon: <Heart weight={isFavorite(post) ? 'fill' : 'regular'} color={'#ddf4ff'}/>,
-              name: "is_favorite",
-            },
-            {
-              text: "Desaprovar",
-              icon: <ThumbsDown color={'#ddf4ff'}/>,
-              name: "tabcoin_down",
-            },
-          ]}
-          onPressItem={handleClickFloatItem}
-        />
-      </View>
+      <FloatActionButton
+        actions={[
+          {
+            text: "Aprovar",
+            icon: <ThumbsUp color={'#ddf4ff'}/>,
+            name: "tabcoin_up",
+          },
+          {
+            text: isFavorite(post) ? "Desfavoritar" : "Favoritar",
+            icon: <Heart weight={isFavorite(post) ? 'fill' : 'regular'} color={'#ddf4ff'}/>,
+            name: "is_favorite",
+          },
+          {
+            text: "Desaprovar",
+            icon: <ThumbsDown color={'#ddf4ff'}/>,
+            name: "tabcoin_down",
+          },
+        ]}
+        onPressItem={handleClickFloatItem}
+      />
       <ScrollView style={styles.container}>
         <Text style={styles.title}>{post.title}</Text>
         <View style={{
