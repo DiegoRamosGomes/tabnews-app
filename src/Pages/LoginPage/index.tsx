@@ -16,7 +16,9 @@ export const LoginPage = () => {
     setIsLoading(true)
 
     if (!(email.length > 0 && email.includes('@'))) {
-      return alert('preencha todos os campos')
+      alert('preencha todos os campos')
+      setIsLoading(false)
+      return
     }
 
     signIn(email, password).then(value => {
