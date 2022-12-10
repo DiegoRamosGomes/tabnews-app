@@ -9,7 +9,7 @@ import { Heart, ThumbsDown, ThumbsUp } from "phosphor-react-native";
 import FavoriteContext from "../../Contexts/FavoriteContext";
 import AuthContext from "../../Contexts/AuthContext";
 import { FloatActionButton } from "../../Components/FloatActionButton";
-import MarkdownWebView from 'react-native-github-markdown';
+import { Markdown } from "../../Components/Markdown";
 
 type ScreenProps = NativeStackScreenProps<HomeStackRoutes, 'PostPage'>;
 
@@ -75,18 +75,13 @@ export const PostPage = ({ route }: ScreenProps) => {
       />
       <ScrollView
         style={styles.container}
+        contentContainerStyle={{ paddingBottom: 16 }}
       >
         <Text style={styles.title}>{post.title}</Text>
         <View style={{
           borderBottomWidth: 2,
         }}>
-          <MarkdownWebView
-            style={{
-              marginHorizontal: -35,
-            }}
-            content={postContent?.body ?? ''}
-            highlight
-          />
+          <Markdown body={postContent?.body ?? ''}/>
         </View>
         <PostComments post={post}/>
       </ScrollView>
