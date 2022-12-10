@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#f1f1f1',
     marginBottom: 16,
     padding: 8,
-    borderRadius: 5
+    borderRadius: 5,
   },
   owner: {
     alignSelf: 'flex-start',
@@ -17,6 +17,8 @@ export const styles = StyleSheet.create({
   },
   body: {
     marginLeft: 8,
+    position: 'relative',
+    flex: 1
   },
   quantityContainer: {
     flexDirection: 'row',

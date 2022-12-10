@@ -10,12 +10,5 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 8,
-  },
-  body: {
-
-  },
-  contentContainer: {
-    flex: 1,
-    alignItems: 'center',
-  },
+  }
 })
