@@ -3,10 +3,14 @@ import { useContext, useState } from "react";
 import { styles } from "./styles";
 import AuthContext from "../../Contexts/AuthContext";
 import { FullscreenLoading } from "../../Components/FullscreenLoading";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { AuthStackRoutes } from "../../Routes/AuthRoutes";
 
 const mailFormatValidator = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
-export const LoginPage = () => {
+type ScreenProps = NativeStackNavigationProp<AuthStackRoutes, 'LoginPage'>
+
+export const LoginPage = ({ navigation }: ScreenProps) => {
 
   const { signIn } = useContext(AuthContext)
 
@@ -33,15 +37,7 @@ export const LoginPage = () => {
   }
 
   const handleSignUp = async () => {
-    setIsLoading(true)
-
-    const url = 'https://www.tabnews.com.br/cadastro'
-    const canOpen = Linking.canOpenURL(url)
-    if (canOpen) {
-      await Linking.openURL(url)
-    }
-
-    setIsLoading(false)
+    navigation.navigate('RegisterPage')
   }
 
   const handleForgotPassword = async () => {
