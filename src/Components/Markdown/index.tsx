@@ -1,6 +1,7 @@
 import MarkdownWebView from "react-native-github-markdown";
 import { useState } from "react";
 import { WebViewMessageEvent } from "react-native-webview";
+import { Linking } from "react-native";
 
 interface MarkdownProps {
   body: string
@@ -43,6 +44,17 @@ export const Markdown = ({body}: MarkdownProps) => {
       decelerationRate="normal"
       highlight
       scrollEnabled={false}
+      onShouldStartLoadWithRequest={request => {
+        if (request.url !== 'about:blank') {
+          const canOpen = Linking.canOpenURL(request.url)
+          if (canOpen) {
+            Linking.openURL(request.url)
+          }
+
+          return false
+        }
+        return true
+      }}
       nestedScrollEnabled={false}
       style={{
         flex: 0,
