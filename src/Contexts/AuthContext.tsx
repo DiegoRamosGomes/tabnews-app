@@ -11,7 +11,7 @@ interface AuthContextProps {
 
   signOut(): void
 
-  signUp(): void
+  signUp(username: string, email: string, password: string): Promise<void>
 
   logInUser(): void
 }
@@ -49,8 +49,8 @@ export const AuthProvider = ({ children }) => {
     setUser(null)
   }
 
-  const signUp = () => {
-
+  const signUp = async (username: string, email: string, password: string) => {
+    await api.post('/users', { username, email, password })
   }
 
   const logInUser = async () => {
