@@ -53,7 +53,7 @@ export const HomePage = ({ route }: ScreenOptions) => {
         }}
         data={contents}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <HomeListItem post={item}/>}
+        renderItem={({ item }) => <HomeListItem key={item.id} post={item}/>}
         ItemSeparatorComponent={() => <View style={{ height: 16 }}/>}
         onEndReached={loadPosts}
         onEndReachedThreshold={0.2}
