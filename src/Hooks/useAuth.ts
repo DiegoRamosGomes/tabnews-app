@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserModel } from "../Models/UserModel";
 
-const AUTH_TOKEN_KEY = '@tabnews-app:AUTH_TOKEN_KEY'
+export const AUTH_TOKEN_KEY = '@tabnews-app:AUTH_TOKEN_KEY'
 const AUTH_USER_KEY = '@tabnews-app:AUTH_USER_KEY'
 
 export const useAuth = () => {

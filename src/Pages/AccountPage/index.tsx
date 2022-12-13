@@ -3,14 +3,13 @@ import { ArrowRight } from "phosphor-react-native";
 import { styles } from "./styles";
 import { useContext } from "react";
 import AuthContext from "../../Contexts/AuthContext";
-import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AccountStackRoutes } from "../../Routes/AuccountRoutes";
 
-export const AccountPage = () => {
+type ScreenProps = NativeStackNavigationProp<AccountStackRoutes>
+export const AccountPage = ({ navigation }: ScreenProps) => {
 
-  const { signOut, user } = useContext(AuthContext)
-  const navigation = useNavigation<NativeStackNavigationProp<AccountStackRoutes>>()
+  const { signOut } = useContext(AuthContext)
 
   const handleSingOut = async () => {
     await signOut()
@@ -20,10 +19,18 @@ export const AccountPage = () => {
     navigation.navigate('ProfilePage')
   }
 
+  const handleOpenNewPost = () => {
+    navigation.navigate('CreatePostPage')
+  }
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.item} onPress={handleOpenProfile}>
         <Text style={styles.itemText}>Perfil</Text>
+        <ArrowRight/>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.item} onPress={handleOpenNewPost}>
+        <Text style={styles.itemText}>Novo conteudo</Text>
         <ArrowRight/>
       </TouchableOpacity>
       <TouchableOpacity style={styles.item} onPress={handleSingOut}>
