@@ -30,6 +30,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": ["expo-community-flipper"],
+    "extra": {
+      "eas": {
+        "projectId": "4ed16b98-b475-4c34-86e0-00f90e819a22"
+      }
     }
   }
 }
