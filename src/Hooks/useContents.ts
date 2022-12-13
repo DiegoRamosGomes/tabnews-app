@@ -31,9 +31,21 @@ export const useContents = () => {
     })
   }
 
+  const publishContent = async (title: string, content: string, source?: string) => {
+    const data = {
+      title,
+      body: content,
+      status: 'published',
+      source_url: source
+    }
+
+    return await api.post('/contents', data)
+  }
+
   return {
     getLatestContents,
     getContent,
-    giveVote
+    giveVote,
+    publishContent
   }
 }
